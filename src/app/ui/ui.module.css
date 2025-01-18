@@ -1,0 +1,90 @@
+/* Utility Classes for Alignment and Spacing */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-center {
+  display: grid;
+  justify-items: center;
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.hamburgerButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  margin-top: 2rem;
+  margin-left: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.hamburgerButton .icon {
+  transition: transform 0.8s ease;
+}
+
+/* Dropdown Menu */
+.dropdownMenu {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  padding: 10px 0;
+  width: 90%;
+  transition: transform 0.8s ease, opacity 0.8s ease, visibility 0s 0.3s;
+}
+
+.dropdownMenu.show {
+  transform: translateX(-50%) scaleY(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdownMenu a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdownMenu a:hover {
+  color: gray;
+  transition: color transform 0.3s ease-in-out;
+}
+
+/* Navigation Link Styling */
+.nav {
+  font-size: 18px;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  margin-right: 2rem;
+}
+
+.nav:hover {
+  color: gray;
+  border-bottom: 1px solid gray;
+  transition: color transform 0.3s ease-in-out;
+}
+
+/* Custom Font Class (Dancing Script) */
+.fontFamily {
+  font-family: "Dancing Script", cursive;
+}
