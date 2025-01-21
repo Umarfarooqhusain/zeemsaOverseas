@@ -5,19 +5,25 @@ import styles from "./ui.module.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 
-function Dropdown() {
+export default function Dropdown() {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const closeMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(false);
   };
 
   return (
-    <div className={styles.dropdown}>
-      <button onClick={toggleDropdown} className={styles.hamburgerButton}>
+    <nav className={styles.dropdown} aria-label="Main Navigation">
+      <button
+        onClick={toggleDropdown}
+        className={styles.hamburgerButton}
+        aria-expanded={isOpen}
+        aria-label="Toggle Menu"
+      >
         <div className={`${styles.icon} ${isOpen ? "rotate-180" : ""}`}>
           {isOpen ? (
             <AiOutlineClose size={30} />
@@ -26,19 +32,24 @@ function Dropdown() {
           )}
         </div>
       </button>
-      <div
-        style={{ fontFamily: "Dancing Script" }}
-        onClick={closeMenu}
-        className={`${styles.dropdownMenu} ${isOpen ? styles.show : ""} `}
-      >
-        <Link href="/">Home</Link>
-        <Link href="/aboutUs">About</Link>
-        <Link href="/why">Why Us</Link>
 
-        <Link href="/contactUs">Contact Us</Link>
-      </div>
-    </div>
+      <ul
+        className={`${styles.dropdownMenu} ${isOpen ? styles.show : ""}`}
+        style={{ fontFamily: "Dancing Script" }}
+      >
+        <li onClick={closeMenu}>
+          <Link href="/">Home</Link>
+        </li>
+        <li onClick={closeMenu}>
+          <Link href="/aboutUs">About</Link>
+        </li>
+        <li onClick={closeMenu}>
+          <Link href="/why">Why Us</Link>
+        </li>
+        <li onClick={closeMenu}>
+          <Link href="/contactUs">Contact Us</Link>
+        </li>
+      </ul>
+    </nav>
   );
 }
-
-export default Dropdown;

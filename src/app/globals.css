@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  width: 100%;
-  margin: auto;
-}
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   width: 100%;
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif; /* Optional: Add a global font-family */
+  background-color: #ffffff; /* Optional: Set a default background color */
+}
+
+/* Ensure the body spans the entire viewport */
+body {
+  min-height: 100vh;
+  margin: auto;
 }

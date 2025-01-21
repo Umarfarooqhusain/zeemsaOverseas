@@ -1,20 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const ImageSlider = () => {
+export default function ImageSlider() {
   const images = ["/assets/hero2.jpg", "/assets/hero1.jpg"];
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(true); // Start fade-out
+      setFade(true);
+
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setFade(false); // Start fade-in
-      }, 20); // Duration of the fade-out
+        setFade(false);
+      }, 300);
     }, 5000);
+
     return () => clearInterval(interval);
   }, [images.length]);
 
@@ -29,6 +30,4 @@ const ImageSlider = () => {
       />
     </div>
   );
-};
-
-export default ImageSlider;
+}

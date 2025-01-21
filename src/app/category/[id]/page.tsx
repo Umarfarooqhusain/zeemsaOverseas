@@ -1,7 +1,6 @@
-import client from "../../sanityClient";
+import client from "../../sanityClient"; // Correct path to your sanityClient
+import Image from "next/image";
 import styles from "@/app/ui/ui.module.css";
-
-// Define Product and Category types
 interface Product {
   _id: string;
   name: string;
@@ -12,7 +11,7 @@ interface Category {
   _id: string;
   name: string;
   image: string;
-  products: Product[]; // Array of products associated with this category
+  products: Product[];
 }
 
 async function fetchCategoryById(categoryId: string): Promise<Category | null> {
@@ -21,6 +20,7 @@ async function fetchCategoryById(categoryId: string): Promise<Category | null> {
     name,
     "image": image.asset->url,
     products[] {
+      _id,
       name,
       "image": image.asset->url
     }
@@ -37,47 +37,24 @@ export default async function CategoryPage({
 }) {
   const { id } = await params;
 
-  if (!id) {
-    return <div>Error: Category ID is missing.</div>;
-  }
-
-  let category: Category | null = null;
-  try {
-    category = await fetchCategoryById(id);
-  } catch (error) {
-    console.error("Failed to fetch category:", error);
-    return <div>Error: Could not fetch category.</div>;
-  }
+  const category = await fetchCategoryById(id);
 
   if (!category) {
     return <div>Category not found.</div>;
-  }
-
-  // Ensure that category.products exists and is an array before checking its length
-  if (!category.products || category.products.length === 0) {
-    return (
-      <div className="text-center text-gray-500">
-        No products found in this category.
-      </div>
-    );
   }
 
   return (
     <div className="p-8">
       <div className="flex justify-center">
         <span
-          className={` text-3xl font-semibold tracking-wide md:mt-28 ${styles.nav}`}
+          className={`text-3xl font-semibold tracking-wide md:mt-28 ${styles.nav}`}
         >
           {category.name}
         </span>
       </div>
-
       <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-        {category.products.map((product) => (
-          <div
-            key={product._id} // Ensure the key is unique and based on the product's unique _id
-            className="flex flex-col items-center"
-          >
+        {category.products.map((product: Product, index: number) => (
+          <div key={index} className="flex flex-col items-center">
             <div className="flex items-center justify-center border border-gray-200 shadow-md overflow-hidden transition-transform transform duration-500 hover:-translate-y-2 hover:shadow-lg hover:shadow-gray-400">
               <img
                 src={product.image || "/placeholder.png"}

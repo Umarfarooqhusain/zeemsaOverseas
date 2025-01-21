@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
+import { output } from "framer-motion/client";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+
+  images: {
+    domains: ["cdn.sanity.io"], // Allow Sanity's CDN for images
+    unoptimized: true, // Disable image optimization for static export
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
